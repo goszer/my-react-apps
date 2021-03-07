@@ -1,0 +1,7 @@
+.bulb.off {
+    background-color: white;
+}
+
+.bulb.on {
+    background-color: yellow;
+}
