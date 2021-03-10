@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import './item-status-filter.css';
+import classNames from 'classnames';
+
 
 export default class ItemStatusFilter extends Component {
 
@@ -8,27 +10,40 @@ export default class ItemStatusFilter extends Component {
     }
 
     onClick = (selected) => {
+        const {btnName: sel} = selected;
         const { onFilter } = this.props;
 
         this.setState({
-            label: selected
+            selected: sel
         });
 
-        onFilter(selected);
+        onFilter(sel);
+    }
+
+    getCn = (btnName) => {
+        const {btnName: bName} = btnName;
+        let isSelected = (bName == this.state.selected);
+        let cn = classNames('btn', {'btn-info' : isSelected, 'btn-outline-secondary': !isSelected});
+        console.log(cn);
+        return cn;
+    }
+
+    addButton = (btnName) => {
+        let res = (
+            <button type="button"
+                    name={btnName}
+                    className={this.getCn({btnName})}
+                    onClick={() => this.onClick({btnName})}>{btnName}</button>
+        );
+        return res;
     }
 
     render() {
         return (
             <div className="btn-group">
-                <button type="button"
-                        className="btn btn-info"
-                        onClick={() => this.onClick('All')}>All</button>
-                <button type="button"
-                        className="btn btn-outline-secondary"
-                        onClick={() => this.onClick('Active')}>Active</button>
-                <button type="button"
-                        className="btn btn-outline-secondary"
-                        onClick={() => this.onClick('Done')}>Done</button>
+                {this.addButton('All')}
+                {this.addButton('Active')}
+                {this.addButton('Done')}
             </div>
         );
     }
