@@ -3,29 +3,29 @@ import './search-panel.css';
 
 export default class SearchPanel extends Component{
 
-  state = {
-    label: ''
-  };
+    state = {
+        label: ''
+    };
 
-  onLabelChange = (e) => {
-    const { onFilter } = this.props;
-    const filterText = e.target.value;
+    onLabelChange = (e) => {
+        const { onFilter } = this.props;
+        const filterText = e.target.value;
 
-    this.setState({
-      label: filterText
-    });
+        this.setState({
+            label: filterText
+        });
 
-    onFilter(filterText);
-  };
+        onFilter(filterText);
+    };
 
-  render() {
-    return (
-        <input type="search"
-               className="form-control search-input"
-               placeholder="type to search"
-               onChange={this.onLabelChange}
-               value={this.state.label}/>
-    );
-  }
+    render() {
+        return (
+            <input type="search"
+                   className="form-control search-input"
+                   placeholder="type to search"
+                   onChange={this.onLabelChange}
+                   value={this.state.label}/>
+        );
+    }
 };
 
