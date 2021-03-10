@@ -40,6 +40,25 @@ export default class App extends Component {
     };
   }
 
+  filterList = (list, filterText, statusFilter) => {
+    return list.map((el) => {
+      let visibleByStatus = false;
+      switch(statusFilter) {
+        case 'All':
+          visibleByStatus = true;
+          break;
+        case 'Active':
+          visibleByStatus = !el.done;
+          break;
+        case 'Done':
+          visibleByStatus = el.done;
+      }
+      let visibleByText = el.label.toUpperCase().includes(filterText.toUpperCase()) ;
+      let isVisible = visibleByStatus && visibleByText;
+      return {...el, ['visible']: isVisible };
+    });
+  };
+
   onAdded = (label) => {
     this.setState(({ todoData }) => {
       const todo = this.createTodo(label);
@@ -92,31 +111,13 @@ export default class App extends Component {
   toggleDone = (id) => {
     this.setState(({ todoData }) => {
       let res = this.toggleProperty(todoData, 'done', id);
+      res = this.filterList(res, this.state.filterText, this.state.statusFilter);
       return {
         todoData: res,
         title: this.getTitle(res),
         filterText: this.state.filterText,
         statusFilter: this.state.statusFilter
       }
-    });
-  };
-
-  filterList = (list, filterText, statusFilter) => {
-    return list.map((el) => {
-      let visibleByStatus = false;
-      switch(statusFilter) {
-        case 'All':
-          visibleByStatus = true;
-          break;
-        case 'Active':
-          visibleByStatus = !el.done;
-          break;
-        case 'Done':
-          visibleByStatus = el.done;
-      }
-      let visibleByText = el.label.toUpperCase().includes(filterText.toUpperCase()) ;
-      let isVisible = visibleByStatus && visibleByText;
-      return {...el, ['visible']: isVisible };
     });
   };
 
