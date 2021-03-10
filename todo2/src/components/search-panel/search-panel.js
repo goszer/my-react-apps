@@ -20,7 +20,7 @@ export default class SearchPanel extends Component{
 
   render() {
     return (
-        <input type="text"
+        <input type="search"
                className="form-control search-input"
                placeholder="type to search"
                onChange={this.onLabelChange}
