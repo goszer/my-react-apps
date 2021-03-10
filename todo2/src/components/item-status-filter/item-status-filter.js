@@ -5,27 +5,27 @@ import classNames from 'classnames';
 
 export default class ItemStatusFilter extends Component {
 
+    buttons = [ 'All', 'Active', 'Done' ]
+
     state = {
         selected : 'All'
     }
 
-    onClick = (selected) => {
-        const {btnName: sel} = selected;
+    onClick = (btnName) => {
+        const {btnName: bName} = btnName;
         const { onFilter } = this.props;
 
         this.setState({
-            selected: sel
+            selected: bName
         });
 
-        onFilter(sel);
+        onFilter(bName);
     }
 
     getCn = (btnName) => {
         const {btnName: bName} = btnName;
         let isSelected = (bName == this.state.selected);
-        let cn = classNames('btn', {'btn-info' : isSelected, 'btn-outline-secondary': !isSelected});
-        console.log(cn);
-        return cn;
+        return classNames('btn', {'btn-info' : isSelected, 'btn-outline-secondary': !isSelected});
     }
 
     addButton = (btnName) => {
@@ -41,9 +41,7 @@ export default class ItemStatusFilter extends Component {
     render() {
         return (
             <div className="btn-group">
-                {this.addButton('All')}
-                {this.addButton('Active')}
-                {this.addButton('Done')}
+                { this.buttons && this.buttons.map((el) => ( this.addButton(el) )) }
             </div>
         );
     }
