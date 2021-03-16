@@ -1,26 +1,25 @@
 import PropTypes from 'prop-types';
 import { Button, Card, Icon, Image } from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const TvShowItem = ({
-  key,
   id,
   name,
   rating,
   posterPath,
   favorite,
-  onFavClick,
+  onFavoriteButtonClick,
   releaseDate,
 }) => {
   const handleFavoriteButtonClick = (event) => {
     event.preventDefault();
-    onFavClick();
-  }
+    onFavoriteButtonClick();
+  };
 
   return (
     <Card
       as={Link}
-      to={`/tvshowdetail/${id}`}
+      to={`/show/${id}`}
       style={{
         cursor: 'pointer',
       }}
@@ -34,8 +33,13 @@ const TvShowItem = ({
         <Icon name="star" />
         {rating}
       </Card.Content>
-      <Card.Content >
-        <Button fluid basic={!favorite} positive={favorite} onClick={handleFavoriteButtonClick}>
+      <Card.Content>
+        <Button
+          fluid
+          basic={!favorite}
+          positive={favorite}
+          onClick={handleFavoriteButtonClick}
+        >
           <Icon name="heart" />
           {favorite ? 'Remove from favorites' : 'Add to favorites'}
         </Button>
@@ -45,13 +49,13 @@ const TvShowItem = ({
 };
 
 TvShowItem.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   name: PropTypes.string,
   rating: PropTypes.number,
   posterPath: PropTypes.string,
   releaseDate: PropTypes.string,
   favorite: PropTypes.bool,
-  onClick: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
 };
 
 export default TvShowItem;

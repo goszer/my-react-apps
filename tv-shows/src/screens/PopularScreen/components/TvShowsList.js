@@ -10,7 +10,7 @@ const TvShowsList = ({
   favorites,
   onFavoritesChange,
 }) => {
-  const handleTvShowFavClick = (id) => {
+  const handleFavoriteButtonClick = (id) => {
     const newFavorites = xor(favorites, [id]);
     onFavoritesChange(newFavorites);
   };
@@ -46,7 +46,7 @@ const TvShowsList = ({
               posterPath={poster_path}
               rating={vote_average}
               releaseDate={first_air_date}
-              onFavClick={() => handleTvShowFavClick(id)}
+              onFavoriteButtonClick={() => handleFavoriteButtonClick(id)}
               favorite={favorites.some((favorite) => id === favorite)}
             />
           )

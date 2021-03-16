@@ -1,33 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import TvShowsList from './components/TvShowsList';
-import { Container, Divider, Header, Input } from 'semantic-ui-react';
+import Screen from '../../components/Screen';
+import { Input } from 'semantic-ui-react';
+import usePopularTvShowsApi from './hooks/usePopularTvShowsApi';
 
 const PopularScreen = () => {
-    const [searchFieldValue, setSearchFieldValue] = useState('');
-    const [favorites, setFavorites] = useState([85271]);
-    const [popularShows, setPopularShows] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const params = new URLSearchParams({
-            api_key: process.env.REACT_APP_API_KEY,
-            language: 'en_US',
-            page: 1,
-        });
-        fetch(`https://api.themoviedb.org/3/tv/popular?${params}`)
-            .then((res) => res.json())
-            .then(
-                (response) => {
-                    setPopularShows(response);
-                    setIsLoaded(true);
-                },
-                (error) => {
-                    setError(error);
-                    setIsLoaded(true);
-                }
-            );
-    }, []);
+  const [searchFieldValue, setSearchFieldValue] = useState('');
+  const [favorites, setFavorites] = useState([85271]);
+  const { popularShows, isLoaded, error } = usePopularTvShowsApi();
 
   const handleSearchFieldChange = (e) => {
     setSearchFieldValue(e.target.value);
@@ -48,9 +28,7 @@ const PopularScreen = () => {
   };
 
   return (
-    <Container>
-      <Header as="h1">Tv Shows</Header>
-      <Divider />
+    <Screen>
       <Input
         placeholder="Search shows..."
         value={searchFieldValue}
@@ -63,7 +41,7 @@ const PopularScreen = () => {
         isLoaded={isLoaded}
         error={error}
       />
-    </Container>
+    </Screen>
   );
 };
 

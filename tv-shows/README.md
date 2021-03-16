@@ -1,72 +1,101 @@
-# Proba
+# TV Shows app
 
-# Getting Started with Create React App
+## Additional feature ideas 👨‍🎨
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[] Implement search bar
+[] Add message "No results found" when no results are returned from the api
+[] Make favorites persistent (https://github.com/rehooks/local-storage)
+[] Add a new button "Load more" and implement pagination
+[] Implement endless scrolling
+[] Separate app in 2 menus: Popular / Favorites
+[] Add a way to view the trailer (not sure if it's possible anymore with the new version of their api)
 
-## Available Scripts
+## Resources
 
-In the project directory, you can run:
+- Create React App: https://create-react-app.dev
+- React docs: https://reactjs.org/docs/hello-world.html
+- Syntax beautifier: https://prettier.io/
+- react-router-dom https://reactrouter.com/web
+- react-semantic-ui UI library https://react.semantic-ui.com/
+- lodash https://lodash.com/docs/
+- api: https://developers.themoviedb.org/3/tv/get-tv-details
+- feature inspiration: https://www.themoviedb.org/
 
-### `npm start`
+## Hooks cheatsheet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Reading: https://reactjs.org/docs/hooks-intro.html
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### useState
 
-### `npm test`
+```
+const [value, setValue] = useState(initialValue)
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### useEffect
 
-### `npm run build`
+```
+useEffect(callback) // all state
+useEffect(callback, []) // no state
+useEffect(callback, [some, state]) // [some, state]
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### useMyHook
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Read first: https://reactjs.org/docs/hooks-custom.html
 
-### `npm run eject`
+## Good-to-know JS libraries
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Package Managers: npm / yarn
+- Module bundlers: webpack / rollup
+- Transpilation: babel
+- Task managers: grunt / gulp (nobody uses them anymore :)
+- Linters: eslint
+- Type checking: prop-types / flow / TypeScript
+- UI frameworks: material-ui / bootstrap / semantic-ui
+- Utils: lodash / ramda
+- Style utils: class-names
+- Api: fetch / axios
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Book Recommendations
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Practical Modern JS https://github.com/mjavascript/practical-modern-javascript
+- You Don't Know JS https://github.com/getify/You-Dont-Know-JS
+- Funcional Programming in JavaScript https://www.manning.com/books/functional-programming-in-javascript
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## API
 
-## Learn More
+At first we have to create an account in [https://www.themoviedb.org/](https://www.themoviedb.org/).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Then we have to obtain an API key from the settings page: [https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api). We will use the v3 auth.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The api must be present in every api call:
 
-### Code Splitting
+```
+https://api.themoviedb.org/3/movie/550?api_key={api_key}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+We need to store this api key in our project. Create React App provides already a way for us to define [custom environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/). This functionality is provided by a package called `react-scripts`.
 
-### Analyzing the Bundle Size
+In the root folder of our application we can add a dot file named `.env.local` for our local development environment with the following contents:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```jsx
+REACT_APP_API_KEY = your_api_key;
+```
 
-### Making a Progressive Web App
+Apart from that we can have multiple other keys according to the environment:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```jsx
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+```
 
-### Advanced Configuration
+The variable becomes available to our project:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```jsx
+process.env.REACT_APP_API_KEY;
+```
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please remember to restart your development server, auto reload will not catch this change.
