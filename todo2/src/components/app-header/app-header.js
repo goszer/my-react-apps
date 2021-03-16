@@ -3,11 +3,6 @@ import './app-header.css';
 
 export default class AppHeader extends Component {
 
-    state = {
-        toDo: 0,
-        done: 0
-    }
-
     render() {
         const { title } = this.props;
 
