@@ -2,13 +2,19 @@
 
 ## Additional feature ideas 👨‍🎨
 
-[] Implement search bar
-[] Add message "No results found" when no results are returned from the api
-[] Make favorites persistent (https://github.com/rehooks/local-storage)
-[] Add a new button "Load more" and implement pagination
+[X] Implement search bar
+
+[X] Add message "No results found" when no results are returned from the api
+
+[X] Make favorites persistent (https://github.com/rehooks/local-storage)
+
+[X] Add a new button "Load more" and implement pagination
+
 [] Implement endless scrolling
+
 [] Separate app in 2 menus: Popular / Favorites
-[] Add a way to view the trailer (not sure if it's possible anymore with the new version of their api)
+
+[X] Add a way to view the trailer (not sure if it's possible anymore with the new version of their api)
 
 ## Resources
 
