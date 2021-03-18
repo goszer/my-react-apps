@@ -16,6 +16,8 @@ const TvShowItem = ({
     onFavoriteButtonClick();
   };
 
+  let imagePath = posterPath ? `https://image.tmdb.org/t/p/w500/${posterPath}` : "https://needassistant.com/img/nopic.jpg";
+
   return (
     <Card
       as={Link}
@@ -24,7 +26,7 @@ const TvShowItem = ({
         cursor: 'pointer',
       }}
     >
-      <Image src={`https://image.tmdb.org/t/p/w500/${posterPath}`} alt={name} />
+      <Image src={imagePath} alt={name} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Meta>{releaseDate}</Card.Meta>

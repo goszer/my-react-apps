@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Card, Dimmer, Loader, Message, Segment } from 'semantic-ui-react';
 import TvShowItem from './TvShowItem';
 import { xor } from 'lodash';
+import ErrorMessage from "../../../components/ErrorMessage";
 
 const TvShowsList = ({
   isLoaded,
@@ -10,6 +11,8 @@ const TvShowsList = ({
   favorites,
   onFavoritesChange,
 }) => {
+  //console.log("show lista: ", shows);
+
   const handleFavoriteButtonClick = (id) => {
     const newFavorites = xor(favorites, [id]);
     onFavoritesChange(newFavorites);
@@ -25,14 +28,16 @@ const TvShowsList = ({
 
   if (isLoaded && error) {
     return (
-      <Message negative>
-        <Message.Header>
-          We're sorry, we can't display the popular tv shows at the moment.
-        </Message.Header>
-        <p>Please contact support NOW!!!</p>
-      </Message>
+      <ErrorMessage />
     );
   }
+
+  if (isLoaded && shows.length <=0) {
+    return (
+        <ErrorMessage msg="No result"/>
+    );
+  }
+
 
   return (
     <Segment>
