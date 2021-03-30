@@ -3,7 +3,7 @@ import TvShowsList from './components/TvShowsList';
 import Screen from '../../components/Screen';
 import {Button, Grid, GridColumn, Input} from 'semantic-ui-react';
 import useSearchTvshowsApi from "./hooks/useSearchTvShowsApi";
-import _ from 'lodash';
+import { debounce } from 'lodash';
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 const PopularScreen = () => {
@@ -13,7 +13,7 @@ const PopularScreen = () => {
     const [page, setPage] = useState(1);
     let {totalList, isLoaded, error, loadMoreBtnVisible} = useSearchTvshowsApi(searchText, page);
 
-    const delayedSet = useCallback(_.debounce((text)=>delayedSetSearchText(text), 500 ), []);
+    const delayedSet = useCallback(debounce((text)=>delayedSetSearchText(text), 750 ), []);
 
     const handleSearchFieldChange = (e) => {
         const val = e.target.value;

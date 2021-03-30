@@ -1,15 +1,29 @@
 import {List} from 'semantic-ui-react';
+import {useStore} from "../services/AppContext";
 
-const BookingListItem = ({id, name, phone, guests, date, time}) => {
+const BookingList = () => {
+    const [bookingData] = useStore();
+    const elements = bookingData.map((item) => {
+        const {id, ...itemProps} = item;
+
+        return (
+            <>
+                <List.Item key={id}>
+                    <b>Guest name: </b> {itemProps.name} <br/>
+                    <b>Number of Contact:</b> {itemProps.phone} <br/>
+                    <b>Number of Guests:</b>{itemProps.guests} <br/>
+                    <b>Date and Time:</b> {new Date(itemProps.dateTime).toString()} <br/>
+                </List.Item>
+                <hr/>
+            </>
+        )
+    });
 
     return (
-      <List key={`listItem:${id}`}>
-          <List.Item>
-              <List.Content>{name}</List.Content>
-          </List.Item>
-      </List>
+        <List>
+            {elements}
+        </List>
     );
-
 }
 
-export default BookingListItem;
+export default BookingList;

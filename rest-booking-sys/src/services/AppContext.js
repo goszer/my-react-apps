@@ -6,10 +6,10 @@ Store.displayName = 'Store';
 export const useStore = () => React.useContext(Store);
 
 export const StoreProvider = ({ children, initialState, reducer }) => {
-    const [params, dispatch] = React.useReducer(reducer, initialState);
+    const [bookings, dispatcher] = React.useReducer(reducer, initialState);
 
     return (
-        <Store.Provider value={[params, dispatch]}>
+        <Store.Provider value={[bookings, dispatcher]}>
             {children}
         </Store.Provider>
     );
