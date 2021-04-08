@@ -1,4 +1,4 @@
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Breadcrumb, Dimmer, Divider, Grid, Header, Image, Label, Loader, Message, Segment } from 'semantic-ui-react';
 import Screen from '../../components/Screen';
 import useTvShowDetailsApi from "./hooks/useTvShowDetailsApi";
