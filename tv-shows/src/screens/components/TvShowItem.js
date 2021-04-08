@@ -28,7 +28,9 @@ const TvShowItem = ({
     >
       <Image src={imagePath} alt={name} />
       <Card.Content>
-        <Card.Header>{name}</Card.Header>
+        <Card.Header>
+          <p style={{ minHeight: '90px' }}>{name}</p>
+        </Card.Header>
         <Card.Meta>{releaseDate}</Card.Meta>
       </Card.Content>
       <Card.Content>
