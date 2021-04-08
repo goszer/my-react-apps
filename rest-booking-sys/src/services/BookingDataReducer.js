@@ -1,6 +1,4 @@
 export const addNewBooking = (newBooking) => {
-    console.log(newBooking);
-
     return {
         type: "ADD",
         newBooking: newBooking
