@@ -43,6 +43,7 @@ const TvShowItem = ({
           basic={!favorite}
           positive={favorite}
           onClick={handleFavoriteButtonClick}
+          style={{ minHeight: '80px' }}
         >
           <Icon name="heart" />
           {favorite ? 'Remove from favorites' : 'Add to favorites'}
