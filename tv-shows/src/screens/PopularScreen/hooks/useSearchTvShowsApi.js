@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 
-const useSearchTvShowsApi = (sText, page) => {
+const useSearchTvShowsApi = (sText) => {
+    const [page, setPage] = useState(1);
     const [totalList, setTotalList] = useState([]);
     const [showList, setShowList] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
-    const [loadMoreBtnVisible, setLoadMoreBtnVisible] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
+        setPage(1);
+        setShowList([]);
         setTotalList([]);
     }, [sText]);
 
@@ -21,14 +24,13 @@ const useSearchTvShowsApi = (sText, page) => {
         });
         const req = sText === ""
             ? `https://api.themoviedb.org/3/tv/popular?${params}`
-            :`https://api.themoviedb.org/3/search/tv?${params}`;
+            : `https://api.themoviedb.org/3/search/tv?${params}`;
 
-        console.log(req);
         fetch(req)
             .then((res) => res.json())
             .then(
                 (response) => {
-                    setLoadMoreBtnVisible(response.page < response.total_pages);
+                    setHasMore(response.page < response.total_pages)
                     setShowList(response.results);
                     setIsLoaded(true);
                 },
@@ -44,10 +46,12 @@ const useSearchTvShowsApi = (sText, page) => {
     }, [showList]);
 
     return {
+        page,
+        setPage,
         totalList,
         isLoaded,
         error,
-        loadMoreBtnVisible
+        hasMore
     };
 };
 

@@ -1,17 +1,29 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import PopularScreen from './screens/PopularScreen';
+import FavoritesScreen from './screens/FavoritesScreen';
 import TvShowDetailsScreen from './screens/TvShowDetailsScreen/TvShowDetailsScreen';
+import PrivateRoute from './components/PrivateRouter';
+import LoginScreen from './screens/LoginScreen';
 
 const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/show/:id">
+        <Route path="/login">
+          <LoginScreen />
+        </Route>
+        <PrivateRoute path="/show/:id">
           <TvShowDetailsScreen />
-        </Route>
-        <Route path="/">
+        </PrivateRoute>
+        <PrivateRoute path="/popular" >
           <PopularScreen />
-        </Route>
+        </PrivateRoute>
+        <PrivateRoute path="/favorites" >
+          <FavoritesScreen />
+        </PrivateRoute>
+        <PrivateRoute path="/" >
+          <Redirect to="/popular" />
+        </PrivateRoute>
       </Switch>
     </Router>
   );

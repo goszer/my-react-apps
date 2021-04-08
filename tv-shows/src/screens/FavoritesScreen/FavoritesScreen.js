@@ -5,32 +5,28 @@ import { debounce } from 'lodash';
 
 import TvShowsList from '../components/TvShowsList';
 import Screen from '../../components/Screen';
-import useSearchTvshowsApi from "./hooks/useSearchTvShowsApi";
+import useFavoriteTvshowsApi from "./hooks/useFavoriteTvShowsApi";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useUserStore } from "../../services/UserContext";
 import { useHistory } from 'react-router-dom';
 
-const PopularScreen = () => {
+const FavoritesScreen = () => {
     const history = useHistory();
     const [userContext] = useUserStore();
     const [searchFieldValue, setSearchFieldValue] = useState('');
     const [searchText, setSearchText] = useState('');
     const [favorites, setFavorites] = useLocalStorage(`favoritesTvShows_${userContext.loggedInUser.username}`, []);
-    const [favsOnly, setFavsOnly] = useState(false);
-    let { page, setPage, totalList, isLoaded, error, hasMore } = useSearchTvshowsApi(searchText);
+    const [favsOnly, setFavsOnly] = useState(true);
+    let { showList, isLoaded, error } = useFavoriteTvshowsApi(favorites, searchText);
 
     const delayedSet = useCallback(debounce((text) => delayedSetSearchText(text), 750), []);
 
     const handleSearchFieldChange = (e) => {
         const val = e.target.value;
-        setPage(1);
         setSearchFieldValue(val);
         delayedSet(val);
     };
 
-    const handleLoadMore = (e) => {
-        setPage(page + 1);
-    }
 
     const delayedSetSearchText = (text) => {
         setSearchText(text);
@@ -43,12 +39,10 @@ const PopularScreen = () => {
     const handleFavsOnlyToggle = () => {
         const newValue = !favsOnly;
         setFavsOnly(newValue);
-        if (newValue) {
-            history.push('/favorites');
+        if (!newValue) {
+            history.push('/popular');
         }
     }
-
-
 
     const greeting = `Hi ${userContext.loggedInUser.name}!`;
     return (
@@ -62,20 +56,19 @@ const PopularScreen = () => {
                     />
                 </Grid.Column>
                 <Grid.Column>
-                    <Checkbox toggle label="Show favorites only" name="favsOnly" checked={favsOnly} onChange={handleFavsOnlyToggle} />
+                    <Checkbox toggle label="Show favorites only" name="favsOnly" checked="{favsOnly}" onChange={handleFavsOnlyToggle} />
                 </Grid.Column>
             </Grid>
             <TvShowsList
-                shows={totalList}
+                shows={showList}
                 favorites={favorites}
                 onFavoritesChange={handleFavoritesChange}
                 isLoaded={isLoaded}
                 error={error}
-                showMore={hasMore}
-                handleLoadMore={handleLoadMore}
+                showMore={false}
             />
         </Screen>
     );
 };
 
-export default PopularScreen;
+export default FavoritesScreen;

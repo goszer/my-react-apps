@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Label, Modal } from "semantic-ui-react";
+import { Button, Modal } from "semantic-ui-react";
 import useTvShowTrailerApi from "../hooks/useTvShowTrailerApi";
 import ReactPlayer from 'react-player'
 

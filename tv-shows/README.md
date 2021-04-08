@@ -10,11 +10,16 @@
 
 [X] Add a new button "Load more" and implement pagination
 
-[] Implement endless scrolling
+[X] Implement endless scrolling
 
-[] Separate app in 2 menus: Popular / Favorites
+[X] Separate app in 2 menus: Popular / Favorites: I implemented a "Show favorites only" toggle ;)
 
 [X] Add a way to view the trailer (not sure if it's possible anymore with the new version of their api)
+
+[X] Implement a login page, only logged in users can acces the list and the details page
+
+[X] Implement Logout button
+
 
 ## Resources
 

@@ -16,7 +16,7 @@ const TvShowItem = ({
     onFavoriteButtonClick();
   };
 
-  let imagePath = posterPath ? `https://image.tmdb.org/t/p/w500/${posterPath}` : "https://needassistant.com/img/nopic.jpg";
+  const imagePath = posterPath ? `https://image.tmdb.org/t/p/w500/${posterPath}` : 'https://via.placeholder.com/210x315/FFFAF0/000000?text=n/a';
 
   return (
     <Card

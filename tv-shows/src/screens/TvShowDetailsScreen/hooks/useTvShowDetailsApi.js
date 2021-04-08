@@ -11,7 +11,7 @@ const useTvShowDetailsApi = (id) => {
             language: 'en_US',
             page: 1,
         });
-        fetch(`https://api.themoviedb.org/3/tv/${id}}}?${params}`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}?${params}`)
             .then((res) => res.json())
             .then(
                 (response) => {
