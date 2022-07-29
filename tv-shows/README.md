@@ -110,3 +110,4 @@ process.env.REACT_APP_API_KEY;
 ```
 
 Please remember to restart your development server, auto reload will not catch this change.
+ 
